@@ -1,0 +1,24 @@
+Food Trucks
+===========
+Food Trucks is a two-tier web application:
+- Data about food trucks in SF is stored in ElasticSearch
+- A web application shows this data based on Python/Flask
+
+(1) Use sources found in project sub-directory. Read the DOCS!
+
+(2) Build the flask application. Note that you need both pip and npm!
+  Step A: Fat docker
+  - Start with an empty alpine image
+  - Install all tools you need
+  - Build the application  
+  - Execute it
+  Step B: Thin docker
+  - Use multi-stage dockerfile to minimize the content of the image
+
+  Compare image sizes between steps
+
+(3) Create docker-compose.yml to start the system
+
+(4) Add an nginx based reverse proxy as part of your compose
+
+(5) Serve all static files (including index.html) directly from nginx. update your flask image so that it DOES NOT contain the static files

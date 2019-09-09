@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  backend:
+    build: ./flask-app
+    image: no_static_presentation
+    #image: thin_nostatic
+    container_name: backend
+ #   ports:
+ #     - 5000:5000
+    depends_on:
+      - es
+  es:
+    image: elasticsearch:5
+    environment:
+      - discovery.type=single-node 
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+   # ports:
+  #    - 9200:9200
+  nginx:
+    build: ./proxy
+    image: ng
+   
+    ports:
+      - 3000:80
+    depends_on:
+      - backend
+    tty: true
+
+  

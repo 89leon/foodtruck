@@ -1,0 +1,9 @@
+FROM python:2.7-alpine as flask-build 
+COPY . /flask-app
+WORKDIR /flask-app
+RUN apk add --update py-pip
+RUN pip install -r requirements.txt
+RUN apk add --update npm
+RUN npm install
+RUN npm run build
+ENTRYPOINT [ "python", "app.py" ]
